@@ -39,7 +39,10 @@ def give_info(phone_number) :
 def delete_fired_user(password) :
     curosr .execute('DELETE FROM users_table WHERE password = ?' , (password ,))
     database . commit()
-    
+# for somebody who wants to change his or her data
+def update_info(password , username , email , phone_number) :
+    curosr .execute('UPDATE users_table SET username = ? , email = ? , phone_number = ? WHERE password = ?' , (username , email , phone_number , password))
+    database . commit()
 
 
 # main-------------------------------------------------------
