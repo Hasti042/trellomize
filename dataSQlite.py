@@ -30,7 +30,7 @@ def read_info(email) :
 
 # query with phone number
 def give_info(phone_number) :
-    phoneNumber =curosr .execute("SELECT * FROM users_table WHERE phone_number = ? ," (phone_number,))
+    phoneNumber =curosr .execute("SELECT * FROM users_table WHERE phone_number = ? " , (phone_number,))
     if phoneNumber == None :
         raise ValueError ('phone number dosent exist!')
     return True
