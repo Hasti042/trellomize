@@ -2,9 +2,9 @@ import logging
 import time
 from os import system
 clear = lambda : system('cls')
-# for old user
 
-def users_pass(function) :   #ارگومان function  و wrapper *args  است
+# for old user
+def users_pass(function) :
     clear()
     users = {'ali'  : ' ALi' , 'Donya' : ' DONya12' , 'reza' : 'REZA??' , 'sara' : 'sARA000'}    #connect databesa
     def wrapper (*args):
@@ -24,7 +24,7 @@ def users_pass(function) :   #ارگومان function  و wrapper *args  است
                 print ('you try more than 6 time plese try after one hour.....') 
                 time . sleep (60*60)
             elif count == 10 :
-                print ('you are blocked! if you forget your pass plese call to our maneger to set new password for you. ')  #add_bot or messege system here 
+                print ('you are blocked! if you forget your pass plese call to our maneger to set new password for you. ')   
                 break
             function(*args)
         return function
