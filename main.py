@@ -15,7 +15,7 @@ class Account:
        if email in self.users or password in self.users:
            console.print("username or password have been used before",style="bold red")
        self.users[username]=user(email,username,password)
-       console.print("you have successfully registered:smiling_face_with_smiling_eyes",style="bold green")
+       console.print("you have successfully registered:smiling_face_with_smiling_eyes:",style="bold green")
     
    def login(self,username,password):
        if username not in self.users:
