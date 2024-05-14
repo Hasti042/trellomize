@@ -15,7 +15,7 @@ class Account:
        if email in self.users or password in self.users:
            console.print("username or password have been used before",style="bold red")
        self.users[username]=user(email,username,password)
-       console.print("you have successfully registered",style="bold green")
+       console.print("you have successfully registered:smiling_face_with_smiling_eyes",style="bold green")
     
    def login(self,username,password):
        if username not in self.users:
@@ -25,7 +25,7 @@ class Account:
            console.print("the password is wrong",style="bold red")
            return
        if not self.users[username].active:
-           console.print("your account is deactive!",style="bold red")
+           console.print("your account is deactive :warning:",style="bold red")
            return
    
    def inactive(self,username):
