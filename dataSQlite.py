@@ -2,28 +2,29 @@ import sqlite3
 from sys import path
 import bcrypt
 #  path[0] for one of vs codes problem doestn dopend on program
+database = sqlite3 .connect(path[0] +"/data.db")
+cursor = database . cursor()
+
 
 def create_table():
     cursor .execute('CREATE TABLE IF NOT EXISTS users_table(password TEXT PRIMARY KEY , username TEXT , email TEXT , phone_number INTEGER )') 
 
 
+
 def insert_info(password , user_name , email , phone_number) :
     try :
-        password = b"password"
-        salt = bcrypt .gensalt()
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-        cursor .execute('INSERT INTO users_table VALUES(?,?,?,?)' , (hashed_password , user_name , email , phone_number))
+        cursor .execute('INSERT INTO users_table VALUES(?,?,?,?)' , (password , user_name , email , phone_number))
         database .commit()
-    except :
-        raise sqlite3 .IntegrityError ('password must be with len 8 with at least one number and one letter')
+    except sqlite3 .IntegrityError :
+           print('Password must be unique.') 
+           return False
     return True
 
 # query with password i mean primary key
-def users_info(password) :   
-  users = cursor .execute('SELECT * FROM users_table WHERE password = ?' , (password,)) .fetchone()
+def verify_password(password , user_name) :   
+  users = cursor .execute('SELECT username , password FROM users_table WHERE password = ? AND username = ?' , (password,user_name)) .fetchone()
   if users == None :
       raise ValueError('password as primary key dosent exist!')
-  print(users)
   return users
 
 # query with email
@@ -49,9 +50,10 @@ def update_info(password , username , email , phone_number) :
     cursor .execute('UPDATE users_table SET username = ? , email = ? , phone_number = ? WHERE password = ?' , (username , email , phone_number , password))
     database . commit()
 
-# main-------------------------------------------------------
 
-database = sqlite3 .connect(path[0] +"/data.db")
-cursor = database . cursor()
+# main-------------------------------------------------------
 database .commit()
+database .close()
+
+
 
