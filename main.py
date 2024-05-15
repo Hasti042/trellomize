@@ -1,4 +1,5 @@
 from rich.console import Console
+import re
 console = Console()
 class user:
     def __init__(self,email,username,password):
@@ -11,16 +12,18 @@ class Account:
    def __init__(self):
         self.users={}
         self.used_emails = set()
-        self.used_passwords = set()
+        self.used_username = set()
    
    def registeration(self,email,username,password):
-       if email in self.used_emails or password in self.used_passwords:
-           console.print("the eamil or password have been used before",style="bold red")
-       
+       pat = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+       if email in self.used_emails or password in self.used_username:
+           console.print("the eamil or username have been used before",style="bold red")
+       if not re.match(pat,email):
+            console.print("the email is invalid!",style="bold red")
        else:
         self.users[username]=user(email,username,password)
         self.used_emails.add(email)
-        self.used_passwords.add(password)
+        self.used_username.add(username)
         console.print("you have successfully registered:smiling_face_with_smiling_eyes:",style="bold green")
     
    def login(self,username,password):
