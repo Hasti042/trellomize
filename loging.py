@@ -12,6 +12,7 @@ class Loging_System :
         self .phone_number = phone_number
         dataSQlite .insert_info(self .password , self .user_name , self .email , self .phone_number)
     def logging ():
+        clear()
             count = 0
             while True :
                try :
