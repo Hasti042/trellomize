@@ -10,20 +10,24 @@ class user:
 class Account:
    def __init__(self):
         self.users={}
+        self.used_emails = set()
+        self.used_passwords = set()
    
    def registeration(self,email,username,password):
-       if email in self.users or password in self.users:
-           console.print("username or password have been used before",style="bold red")
-       self.users[username]=user(email,username,password)
-       console.print("you have successfully registered:smiling_face_with_smiling_eyes:",style="bold green")
+       if email in self.used_emails or password in self.used_passwords:
+           console.print("the eamil or password have been used before",style="bold red")
+       
+       else:
+        self.users[username]=user(email,username,password)
+        self.used_emails.add(email)
+        self.used_passwords.add(password)
+        console.print("you have successfully registered:smiling_face_with_smiling_eyes:",style="bold green")
     
    def login(self,username,password):
-       if username not in self.users:
-           console.print("the username does not exist",style="bold red")
+       if username not in self.users or self.users[username].password !=password :
+           console.print("the username or password does not exist",style="bold red")
            return
-       if  self.users[username].password !=password:
-           console.print("the password is wrong",style="bold red")
-           return
+
        if not self.users[username].active:
            console.print("your account is deactive :warning:",style="bold red")
            return
