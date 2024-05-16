@@ -18,13 +18,13 @@ class Account:
        pat = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
        if email in self.used_emails or password in self.used_username:
            console.print("the eamil or username have been used before",style="bold red")
-       if not re.match(pat,email):
+       elif not re.match(pat,email):
             console.print("the email is invalid!",style="bold red")
        else:
-        self.users[username]=user(email,username,password)
-        self.used_emails.add(email)
-        self.used_username.add(username)
-        console.print("you have successfully registered:smiling_face_with_smiling_eyes:",style="bold green")
+         self.users[username]=user(email,username,password)
+         self.used_emails.add(email)
+         self.used_username.add(username)
+         console.print("you have successfully registered:smiling_face_with_smiling_eyes:",style="bold green")
     
    def login(self,username,password):
        if username not in self.users or self.users[username].password !=password :
