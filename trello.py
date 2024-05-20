@@ -115,3 +115,12 @@ class Users:
                 print(f"User {username} is not a member of the project.")
         else:
             print("Only the leader can assign members to tasks.")
+ def unassign_task_member(self, project, task_id, username, username1):
+        task = next((task for task in project.tasks if task.task_id == task_id), None)
+        if task and self.username == project.leader:
+            if username1 in project.members:
+                task.unassign_member(username1)
+            else:
+                print(f"User {username1} is not a member of the project.")
+        else:
+            print("Only the leader can unassign members from tasks.")
