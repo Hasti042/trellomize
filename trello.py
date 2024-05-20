@@ -76,3 +76,6 @@ class Project:
         self.title = title
         self.leader = leader
         self.members = []
+  def add_member(self, username):
+        if username != self.leader and username not in self.members:
+            self.members.append(username)
