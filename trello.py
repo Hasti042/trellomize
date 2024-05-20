@@ -14,3 +14,15 @@ class Status(Enum):
     DOING = 3
     DONE = 4
     ARCHIVED = 5
+class Task:
+    def __init__(self, title='', description='', assigned_to=None, priority=Priority.LOW, status=Status.BACKLOG):
+        self.task_id = str(uuid.uuid4())
+        self.title = title
+        self.description = description
+        self.start_time = datetime.now()
+        self.end_time = self.start_time + timedelta(hours=24)
+        self.assigned_to = assigned_to if assigned_to is not None else []
+        self.priority = priority
+        self.status = status
+        self.history = []
+        self.comments = []
