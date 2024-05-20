@@ -88,3 +88,9 @@ class Project:
  def delete_project(self):
         print(f"Project '{self.title}' has been deleted.")
         del self
+     
+
+class Users:
+    def __init__(self, username):
+        self.username = username
+        
