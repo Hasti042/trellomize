@@ -69,3 +69,10 @@ class Task:
         print("Comments:")
         for comment in self.comments:
             print(f"- {comment}")
+
+class Project:
+    def __init__(self, project_id, title, leader):
+        self.project_id = project_id
+        self.title = title
+        self.leader = leader
+        self.members = []
