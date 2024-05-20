@@ -38,3 +38,19 @@ class Task:
             self.history.append(username, datetime.now())
   def add_comment(self, username, comment):
         self.comments.append((username, comment, datetime.now()))
+
+  def update_task(self, user, title=None, description=None, end_time=None, priority=None, status=None):
+        if user in self.assigned_to or user == self.leader:
+            if title:
+                self.title = title
+            if description:
+                self.description = description
+            if end_time:
+                self.end_time = end_time
+            if priority:
+                self.priority = priority
+            if status:
+                self.status = status
+            self.history.append((user, datetime.now(), "Updated task details"))
+        else:
+            print("Only assigned members or the project leader can update the task.")
