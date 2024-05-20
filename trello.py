@@ -36,3 +36,5 @@ class Task:
         if username in self.assigned_to:
             self.assigned_to.remove(username)
             self.history.append(username, datetime.now())
+  def add_comment(self, username, comment):
+        self.comments.append((username, comment, datetime.now()))
