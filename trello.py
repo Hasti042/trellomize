@@ -135,3 +135,13 @@ class Users:
         print("Member`s Projects:")
         for proj in member_projects:
             print(f"- {proj.title}")
+  def view_project_details(self, project):
+        print(f"Project ID: {project.project_id}")
+        print(f"Title: {project.title}")
+        print(f"Leader: {project.leader}")
+        print("Members:")
+        for member in project.members:
+            print(f"- {member}")
+        print("Tasks:")
+        for task in project.tasks:
+            print(f"- {task.title} [{task.status.value}]")
