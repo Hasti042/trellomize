@@ -98,3 +98,11 @@ class Users:
         new_project = Project(project_id, title, self.username)
         print(f"Project '{title}' created by {self.username}.")
         return new_project    
+
+    def create_task(self, project, title='', description='', priority=Priority.LOW, status=Status.BACKLOG):
+        if self.username == project.leader:
+            new_task = Task(title, description, priority=priority, status=status)
+            project.add_task(new_task)
+            return new_task
+        else:
+            print("Only the leader can create tasks.")
