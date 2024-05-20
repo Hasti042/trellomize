@@ -54,3 +54,18 @@ class Task:
             self.history.append((user, datetime.now(), "Updated task details"))
         else:
             print("Only assigned members or the project leader can update the task.")
+ def view_task_details(self):
+        print(f"Task ID: {self.task_id}")
+        print(f"Title: {self.title}")
+        print(f"Description: {self.description}")
+        print(f"Start Time: {self.start_time}")
+        print(f"End Time: {self.end_time}")
+        print(f"Assigned To: {', '.join(self.assigned_to)}")
+        print(f"Priority: {self.priority.value}")
+        print(f"Status: {self.status.value}")
+        print("History:")
+        for record in self.history:
+            print(f"- {record}")
+        print("Comments:")
+        for comment in self.comments:
+            print(f"- {comment}")
