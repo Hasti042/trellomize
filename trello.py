@@ -25,9 +25,14 @@ class Task:
         self.priority = priority
         self.status = status
         self.history = []
-        self.comments = []
-
+        self.comments = [] 
+        
     def assign_member(self, username):
         if username not in self.assigned_to:
             self.assigned_to.append(username)
+            self.history.append(username, datetime.now())
+
+    def unassign_member(self, username):
+        if username in self.assigned_to:
+            self.assigned_to.remove(username)
             self.history.append(username, datetime.now())
