@@ -151,3 +151,10 @@ class Users:
             task.view_task_details()
         else:
             print(f"Task with ID {task_id} not found.")
+ def update_task(self, project, task_id, title=None, description=None, end_time=None, priority=None, status=None):
+        task = next((task for task in project.tasks if task.task_id == task_id), None)
+        if task:
+            task.update_task(self.username, title, description, end_time, priority, status)
+        else:
+            print(f"Task with ID {task_id} not found.")
+
