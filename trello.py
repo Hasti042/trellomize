@@ -26,3 +26,8 @@ class Task:
         self.status = status
         self.history = []
         self.comments = []
+
+    def assign_member(self, username):
+        if username not in self.assigned_to:
+            self.assigned_to.append(username)
+            self.history.append(username, datetime.now())
