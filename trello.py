@@ -93,4 +93,8 @@ class Project:
 class Users:
     def __init__(self, username):
         self.username = username
-        
+
+    def create_project(self, project_id, title):
+        new_project = Project(project_id, title, self.username)
+        print(f"Project '{title}' created by {self.username}.")
+        return new_project    
