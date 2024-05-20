@@ -79,3 +79,9 @@ class Project:
   def add_member(self, username):
         if username != self.leader and username not in self.members:
             self.members.append(username)
+
+    def remove_member(self, username):
+        if username in self.members:
+            self.members.remove(username)
+        else:
+            print(f"User {username} is not a member of this project.")
