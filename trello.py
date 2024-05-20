@@ -130,3 +130,8 @@ class Users:
         print("Leader`s Projects:")
         for proj in leader_projects:
             print(f"- {proj.title}")
+  def view_member_projects(self, projects):
+        member_projects = [proj for proj in projects if self.username in proj.members]
+        print("Member`s Projects:")
+        for proj in member_projects:
+            print(f"- {proj.title}")
