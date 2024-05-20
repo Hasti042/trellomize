@@ -85,3 +85,6 @@ class Project:
             self.members.remove(username)
         else:
             print(f"User {username} is not a member of this project.")
+ def delete_project(self):
+        print(f"Project '{self.title}' has been deleted.")
+        del self
