@@ -145,3 +145,9 @@ class Users:
         print("Tasks:")
         for task in project.tasks:
             print(f"- {task.title} [{task.status.value}]")
+ def view_task_details(self, project, task_id):
+        task = next((task for task in project.tasks if task.task_id == task_id), None)
+        if task:
+            task.view_task_details()
+        else:
+            print(f"Task with ID {task_id} not found.")
