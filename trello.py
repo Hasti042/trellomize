@@ -124,3 +124,9 @@ class Users:
                 print(f"User {username1} is not a member of the project.")
         else:
             print("Only the leader can unassign members from tasks.")
+
+    def view_leader_projects(self, projects):
+        leader_projects = [proj for proj in projects if proj.leader == self.username]
+        print("Leader`s Projects:")
+        for proj in leader_projects:
+            print(f"- {proj.title}")
