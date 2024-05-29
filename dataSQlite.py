@@ -60,7 +60,7 @@ def creat_admins_table():
 
 def insert_admin_data(username , password):
     try :
-       cursor .execute("INSERT INTO admins_tabel VALUES (?,?) " , (username , password))
+       cursor .execute("INSERT INTO admins_table VALUES (?,?) " , (username , password))
        database .commit()
     except :
         sqlite3 .IntegrityError('Admin with this data already exist !')
@@ -69,20 +69,19 @@ def insert_admin_data(username , password):
 
 def autuntication(username , password) :
     user=cursor .execute('SELECT * FROM admins_table WHERE username = ? , password = ?' , (username , password)) .fetchone()
-    if user ==None :
+    if user == None :
         print('there isnt any admins with this data !')
     return user
 
-
+def deactive_users(password) :
+    cursor .execute('DELETE FROM admins_table WHERE password = ?' ,(password ,))
 
 if __name__ == '__main__' :
 
    
-
-
-
     database .commit()
     # database .close()
+
 
 
 
