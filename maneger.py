@@ -31,7 +31,5 @@ def create_admin():
 
 
 admins = create_admin()
-SystemAdmin .deactive_user('sahar564')
-
 
 
