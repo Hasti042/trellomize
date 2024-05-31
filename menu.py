@@ -170,9 +170,3 @@ while True:
         print('Invalid choice.')
 
     input('Press any key to continue...')
-
-    else :
-        print('Wrong choice !')
-    
-    input('press any key to continue ....')  
-
