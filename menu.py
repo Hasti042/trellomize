@@ -74,6 +74,36 @@ while True :
                 print('Project not found.')
         else:
             print('Invalid choice.')
+            elif choice == 'B':
+        task_choice = input('Press M to make a task.\nPress A to assign a member to a task.\nPress R to unassign a member from a task.\nPress D to add a comment to a task.\nPress U to update a task.\nPress V to view task details.\nEnter your choice: ').upper()
+        if task_choice == 'M':
+            project_id = input('Please enter the project ID: ')
+            project = projects.get(project_id)
+            if project and current_user == project.leader:
+                title = input('Please enter the task title: ')
+                description = input('Please enter the task description: ')
+                priority = input('Please enter the task priority (CRITICAL/HIGH/MEDIUM/LOW): ').upper()
+                status = input('Please enter the task status (BACKLOG/TODO/DOING/DONE/ARCHIVED): ').upper()
+                task = ts(title, description, priority=Priority[priority], status=Status[status])
+                project.tasks.append(task)
+                print(f'Task {title} created.')
+            else:
+                print('Only the project leader can create tasks or project not found.')
+        elif task_choice == 'A':
+            project_id = input('Please enter the project ID: ')
+            project = projects.get(project_id)
+            if project and current_user == project.leader:
+                task_id = input('Please enter the task ID: ')
+                username = input('Please enter the username: ')
+                task = next((task for task in project.tasks if task.task_id == task_id), None)
+                if task and username in project.members:
+                    task.assign_member(username)
+                    print(f'User {username} assigned to task {task_id}.')
+                else:
+                    print('Task not found or user not a member of the project.')
+            else:
+                print('Only the project leader can assign members or project not found.')
+        elif task_choice == 'R':
     else :
         print('Wrong choice !')
     
