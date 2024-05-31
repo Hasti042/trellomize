@@ -1,6 +1,5 @@
 import dataSQlite
 import time
-import bcrypt
 from os import system
 clear = lambda : system('cls')
 
@@ -12,7 +11,7 @@ class Loging_System :
         self .phone_number = phone_number
         dataSQlite .insert_info(self .password , self .user_name , self .email , self .phone_number)
     
-    def Register(password="", user_name="", email="", phone_number=""):
+    def Register(password = "" , user_name = "" , email = "" , phone_number = "") :
         try :
             if not password:
                 password = input('Enter your password: ')
@@ -95,7 +94,7 @@ class Loging_System :
             return True
         else:
             raise Exception ('invalid email')
-    # validate phone number
+    # validation for phone number
     @property
     def phone_number(self):
         return self ._phone_number
@@ -113,29 +112,27 @@ class Loging_System :
            return True
        else :
            raise Exception('invalid phone_number')
-    
 
     # for new user connect to bo
-    def change_password(username="" , new_password="") :
+    def change_password() :
         from string import digits , ascii_letters
         from random import sample
-        user_name= input('plese enter your username to change your password : ')
+        user_name= input('Plese enter your username to change your password : ')
         if dataSQlite .name_info(user_name) == user_name :
-            print('username exists✅')
+            print('Username exists✅')
             chars =  digits + ascii_letters #just be number and letter
             chars = list(chars)
-            new_password = ""
+            password = ""
             cipher_text=sample(chars , 8)
             for option in cipher_text :
-                new_password+=option
-                if len(new_password) == 8:
-                    print('new password :', new_password)
-                    print('now you can login with your new password')
-                    dataSQlite .update_info(new_password , username)
+                password+=option
+                if len(password) == 8:
+                    print('New password :', password)
+                    print('Now you can login with your new password')
+                    dataSQlite .update_info(user_name , password)
 
         else :
-            print('username dosent exist !')
+           print('Username doesn\'t exist!')
         
 # *********************************************main
-
 
