@@ -1,7 +1,6 @@
 import sqlite3
 from sys import path
-import bcrypt
-#  path[0] for one of vs codes problem doestn dopend on program
+# path[0] for one of vs codes problem doestn dopend on programe
 database = sqlite3 .connect(path[0] +"/data.db")
 cursor = database . cursor()
 
@@ -13,11 +12,19 @@ def insert_info(password , user_name , email , phone_number) :
     try :
         cursor .execute('INSERT INTO users_table VALUES(?,?,?,?)' , 
                        (password , user_name , email , phone_number))
+        print('Successful registration.')
         database .commit()
     except sqlite3 .IntegrityError :
            print('Password must be unique.') 
            return False
     return True
+# query with username for change password
+def name_info(username) : 
+   username = cursor .execute("SELECT username FROM users_table WHERE username = ?" , 
+                           (username ,)) .fetchone()
+   if username is None :
+      raise ValueError('username dosent exist!')
+   return username[0]
 
 # query with password i mean primary key
 def verify_password(password , user_name) :   
@@ -43,12 +50,12 @@ def give_info(phone_number) :
     return True
 
 
-def delete_fired_user(password) :
+def delete_fired_user_orchangePassword(password) :
     cursor .execute('DELETE FROM users_table WHERE password = ?' , (password ,))
     database . commit()
     
-def update_info(password , username , email , phone_number) :
-    cursor .execute('UPDATE users_table SET username = ? , email = ? , phone_number = ? WHERE password = ?' , (username , email , phone_number , password))
+def update_info(password , username ) :
+    cursor .execute(f'UPDATE users_table SET password = ? WHERE username = ?' , (password , username))
     database . commit()
 
 # ********************************************************************
@@ -80,7 +87,10 @@ if __name__ == '__main__' :
 
    
     database .commit()
-    # database .close()
+    #database .close()
+
+
+
 
 
 
