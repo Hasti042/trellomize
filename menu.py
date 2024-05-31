@@ -4,14 +4,14 @@ import log_in as lo
 import maneger as m
 while True :
     lo .clear()
-    print('havent you got any account ? you have to regester at first press R to Register ')
-    print('press L to login')
-    print('press C to change password or you forget your password')
-    print('press S to set super user or create admin account')
-    print('press M to make project')
-    print('press G to give some responsobilite for your project')
-    print('press Q to quite application')
-    print('press T to be able to see telegram support bot')
+    print('havent you got any account ? you have to regester at first Press R to Register ')
+    print('Press L to login')
+    print('Press C to change password or you forget your password')
+    print('Press S to set super user or create admin account')
+    print('Press M to make project')
+    print('Press G to give some responsobilite for your project')
+    print('Press Q to quite application')
+    print('Press T to be able to see telegram support bot')
 
     choice = input('Enter your choice :').upper()
     lo.clear()
