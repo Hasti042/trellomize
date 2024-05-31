@@ -1,0 +1,102 @@
+from telegram import Update , ReplyKeyboardMarkup , ReplyKeyboardRemove , InlineKeyboardButton , InlineKeyboardMarkup
+from telegram.ext import ContextTypes , ApplicationBuilder , CommandHandler , MessageHandler , filters , ConversationHandler , CallbackQueryHandler
+
+se = 0
+re = 0
+B = []
+async def start (update:Update , context:ContextTypes.DEFAULT_TYPE):
+    global key_2
+    key = [['📞ارتباط با ما']]
+    key_2 = ReplyKeyboardMarkup(key , resize_keyboard=True)
+    if update.message.chat.id != 1243725429 :
+        await context.bot.send_message(text=f'سلام {update.message.from_user.first_name}👋🏻❤️\n به ربات ما خوش اومدی' , chat_id=update.message.chat.id)
+        await context.bot.send_message(text='برای ارتباط با ما کلیک کنید :' , chat_id=update.message.chat.id , reply_markup=key_2)
+    else : 
+        await context.bot.send_message(text=f'سلام {update.message.from_user.first_name}👋🏻❤️\n به ربات ما خوش اومدی' , chat_id=update.message.chat.id )
+        await context.bot.send_message(text='شما ادمین هستید.✅' , chat_id=update.message.chat.id)
+
+
+async def text (update:Update , context:ContextTypes.DEFAULT_TYPE):
+    if update.message.text == '📞ارتباط با ما' :
+        await context.bot.send_message(text='💬 پیام خود را وارد کنید:' , chat_id= update.message.chat.id , reply_markup=ReplyKeyboardRemove())
+        
+    return se
+
+async def send_message (update:Update , context:ContextTypes.DEFAULT_TYPE):
+    global key_2 , user
+
+    button = [[InlineKeyboardButton(text='پاسخ 📤' , callback_data='Reply') , InlineKeyboardButton(text='بلاک ❌' , callback_data='Block')] , [InlineKeyboardButton(text='آنبلاک 🔄', callback_data='Unblock')]]
+    button_2 = InlineKeyboardMarkup(button)
+
+    if str(update.message.chat.id) not in B :
+        await context.bot.copy_message(chat_id=1243725429 , from_chat_id=update.message.chat.id , message_id=update.message.message_id)
+        await context.bot.send_message(chat_id=1243725429 , text=f'💬\nUserName : @{update.message.from_user.username}\nChatID : {update.message.chat.id}' , reply_markup=button_2)
+        await context.bot.send_message(text='پیام شما ارسال شد.✅' , chat_id=update.message.chat.id , reply_markup=key_2)
+    else :
+        await context.bot.send_message(text='❌شما بلاک شده اید.❌' , chat_id=update.message.chat.id)
+
+    return ConversationHandler.END
+
+
+async def reply (update:Update , context:ContextTypes.DEFAULT_TYPE):
+    global re , user
+
+    if re != 0 :
+        await context.bot.send_message(text='📩 پاسخ ادمین : ' , chat_id=user) 
+        await context.bot.copy_message(chat_id= user , from_chat_id=update.message.chat.id , message_id=update.message.message_id)  
+        await context.bot.send_message(text='پاسخ شما با موفقیت ارسال شد.✅' , chat_id=update.message.chat.id) 
+        re = 0 
+
+
+async def Button_click (update:Update , context:ContextTypes.DEFAULT_TYPE):
+    global re , user
+    query = update.callback_query
+
+    if query.data == 'Reply' :
+        re = 1
+        query_text = query.message.text
+        user = query_text.split('ChatID : ' , 1)[1]
+        await context.bot.send_message(text=f'شما در حال پاسخید به : {user}🆔' , chat_id= query.message.chat.id)
+        
+    if query.data == 'Block':
+        query_text = query.message.text
+        user = query_text.split('ChatID : ' , 1)[1]
+        B.append(user)
+        await context.bot.send_message(text=f'کاربر مورد نظر با چت ایدی {user}بلاک شد 🅱️' , chat_id= query.message.chat.id)
+
+    if query.data == 'Unblock':
+        query_text = query.message.text
+        user = query_text.split('ChatID : ' , 1)[1]
+        if user in B :
+            B.remove(user)
+            await context.bot.send_message(text=f'کاربر مورد نظر با چت ایدی {user} آنبلاک شد 🔄' , chat_id= query.message.chat.id)
+        else :
+            await context.bot.send_message(text='این کاربر بلاک نبوده است.❎' , chat_id= query.message.chat.id)
+
+    
+
+
+if __name__ == '__main__':
+    application = ApplicationBuilder().token("6593069890:AAF1ltd1oe-j3CnMd1G4NcgCrOc1hChEYkY").build()
+
+    start_handler = CommandHandler('start' , start)
+    application.add_handler(start_handler)
+
+    
+
+    se_handler = ConversationHandler(
+        entry_points=[MessageHandler(filters.Regex('^(📞ارتباط با ما)$') , text)] ,
+        states={
+            se : [MessageHandler(filters.ALL , send_message)]
+        },
+        fallbacks=[]
+    )
+    application.add_handler(se_handler)
+
+    button_handler = CallbackQueryHandler(Button_click)
+    application.add_handler(button_handler)
+
+    re_handler = MessageHandler(filters.ALL , reply)
+    application.add_handler(re_handler)
+
+    application.run_polling()
