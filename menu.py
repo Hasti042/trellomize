@@ -1,4 +1,4 @@
-# .8.0
+# 0.1.0
 # ****************************************************** all of this for menu becouse wo havent got any web page or app and we working in cmd 
 import datetime
 import log_in as lo
