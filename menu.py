@@ -54,6 +54,15 @@ while True :
                 print(f'User {username} added to project {project_id}.')
             else:
                 print('Project not found.')
+             elif project_choice == 'R':
+            project_id = input('Please enter the project ID: ')
+            username = input('Please enter the username: ')
+            project = projects.get(project_id)
+            if project:
+                project.remove_member(username)
+                print(f'User {username} removed from project {project_id}.')
+            else:
+                print('Project not found.')
     else :
         print('Wrong choice !')
     
