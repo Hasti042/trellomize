@@ -45,6 +45,15 @@ while True :
             project = pr(id, title, leader)
             projects[id] = project
             print(f'Project {title} created.')
+            elif project_choice == 'A':
+            project_id = input('Please enter the project ID: ')
+            username = input('Please enter the username: ')
+            project = projects.get(project_id)
+            if project:
+                project.add_member(username)
+                print(f'User {username} added to project {project_id}.')
+            else:
+                print('Project not found.')
     else :
         print('Wrong choice !')
     
