@@ -63,6 +63,17 @@ while True :
                 print(f'User {username} removed from project {project_id}.')
             else:
                 print('Project not found.')
+                        print('Project not found.')
+        elif project_choice == 'D':
+            project_id = input('Please enter the project ID: ')
+            project = projects.pop(project_id, None)
+            if project:
+                project.delete_project()
+                print(f'Project {project_id} deleted.')
+            else:
+                print('Project not found.')
+        else:
+            print('Invalid choice.')
     else :
         print('Wrong choice !')
     
