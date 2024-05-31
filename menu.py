@@ -36,7 +36,15 @@ while True :
             project = pr(id, title, leader)
             projects[id] = project
             print(f'Project {title} created.')
-        
+        elif choice == 'P':
+        project_choice = input('Press M to make a project.\nPress A to add a member to a project.\nPress R to remove a member from a project.\nPress D to delete a project.\nEnter your choice: ').upper()
+        if project_choice == 'M':
+            id = input('Please enter the project ID: ')
+            title = input('Please enter the project title: ')
+            leader = current_user
+            project = pr(id, title, leader)
+            projects[id] = project
+            print(f'Project {title} created.')
     else :
         print('Wrong choice !')
     
