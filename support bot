@@ -9,10 +9,10 @@ async def start (update:Update , context:ContextTypes.DEFAULT_TYPE):
     key = [['📞ارتباط با ما']]
     key_2 = ReplyKeyboardMarkup(key , resize_keyboard=True)
     if update.message.chat.id !=... :
-        await context.bot.send_message(text=f'سلام {update.message.from_user.first_name}👋🏻❤️\n به ربات ما خوش اومدی' , chat_id=update.message.chat.id)
+        await context.bot.send_message(text=f'سلام {update.message.from_user.first_name}👋🏻❤\n به ربات ما خوش اومدی' , chat_id=update.message.chat.id)
         await context.bot.send_message(text='برای ارتباط با ما کلیک کنید :' , chat_id=update.message.chat.id , reply_markup=key_2)
     else : 
-        await context.bot.send_message(text=f'سلام {update.message.from_user.first_name}👋🏻❤️\n به ربات ما خوش اومدی' , chat_id=update.message.chat.id )
+        await context.bot.send_message(text=f'سلام {update.message.from_user.first_name}👋🏻❤\n به ربات ما خوش اومدی' , chat_id=update.message.chat.id )
         await context.bot.send_message(text='شما ادمین هستید.✅' , chat_id=update.message.chat.id)
 
 
