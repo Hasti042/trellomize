@@ -11,15 +11,32 @@ class Loging_System :
         self . email = email
         self .phone_number = phone_number
         dataSQlite .insert_info(self .password , self .user_name , self .email , self .phone_number)
+    
+    def Register(password="", user_name="", email="", phone_number=""):
+        try :
+            if not password:
+                password = input('Enter your password: ')
+            if not user_name:
+                user_name = input('Enter your userID: ')
+            if not email:
+                email = input('Enter your email: ')
+            if not phone_number:
+                phone_number = input('Enter your phone number: ')
+        except :
+                raise ValueError(
+            "one of your data isnot valid please try again"
+            )
+        return Loging_System(password, user_name, email, phone_number)
+    
+    
     def logging ():
-        clear()
             count = 0
             while True :
                try :
                     user_name = input ('Enter your user name :')
                     password = input ('Enter your pass :')
                     if  dataSQlite .verify_password(password , user_name) == (user_name , password) :
-                        print ('this level show us you complte your personal information ... your welcome to our company ....')
+                        print ('corect info ✅this level show us you complte your personal information ... your welcome to our company ....')
                         break
                except ValueError :
                     print ('this user dosent exist please try again !')
@@ -35,6 +52,9 @@ class Loging_System :
                     break
             input ('this is just for our system press any key to continue.....')
     
+    @staticmethod
+    def users_info(password , user_name) :
+        dataSQlite .verify_password(password , user_name)
     
     # validation for passwoed
     @property
@@ -94,24 +114,28 @@ class Loging_System :
        else :
            raise Exception('invalid phone_number')
     
-    
-    # for new user connect to bot
-    def make_password(): 
-        pass
 
-    def change_password():
-        pass
+    # for new user connect to bo
+    def change_password(username="" , new_password="") :
+        from string import digits , ascii_letters
+        from random import sample
+        user_name= input('plese enter your username to change your password : ')
+        if dataSQlite .name_info(user_name) == user_name :
+            print('username exists✅')
+            chars =  digits + ascii_letters #just be number and letter
+            chars = list(chars)
+            new_password = ""
+            cipher_text=sample(chars , 8)
+            for option in cipher_text :
+                new_password+=option
+                if len(new_password) == 8:
+                    print('new password :', new_password)
+                    print('now you can login with your new password')
+                    dataSQlite .update_info(new_password , username)
+
+        else :
+            print('username dosent exist !')
+        
 # *********************************************main
-def Register(password="", user_name="", email="", phone_number=""):
-    if not password:
-        password = input('Enter your password: ')
-    if not user_name:
-        user_name = input('Enter your userID: ')
-    if not email:
-        email = input('Enter your email: ')
-    if not phone_number:
-        phone_number = input('Enter your phone number: ')
-    return Loging_System(password, user_name, email, phone_number)
 
-user= Register()
-Loging_System .logging()
+
