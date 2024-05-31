@@ -104,6 +104,73 @@ while True :
             else:
                 print('Only the project leader can assign members or project not found.')
         elif task_choice == 'R':
+  project_id = input('Please enter the project ID: ')
+            project = projects.get(project_id)
+            if project and current_user == project.leader:
+                task_id = input('Please enter the task ID: ')
+                username = input('Please enter the username: ')
+                task = next((task for task in project.tasks if task.task_id == task_id), None)
+                if task and username in task.assigned_to:
+                    task.unassign_member(username)
+                    print(f'User {username} unassigned from task {task_id}.')
+                else:
+                    print('Task not found or user not assigned to the task.')
+            else:
+                print('Only the project leader can unassign members or project not found.')
+        elif task_choice == 'D':
+            project_id = input('Please enter the project ID: ')
+            project = projects.get(project_id)
+            if project:
+                task_id = input('Please enter the task ID: ')
+                task = next((task for task in project.tasks if task.task_id == task_id), None)
+                if task:
+                    comment = input('Please enter your comment: ')
+                    task.add_comment(current_user, comment)
+                    print('Comment added to task.')
+                else:
+                    print('Task not found.')
+            else:
+                print('Project not found.')
+        elif task_choice == 'U':
+            project_id = input('Please enter the project ID: ')
+            project = projects.get(project_id)
+            if project:
+                task_id = input('Please enter the task ID: ')
+                task = next((task for task in project.tasks if task.task_id == task_id), None)
+                if task:
+                    title = input('Enter new title (leave blank to keep current): ')
+                    description = input('Enter new description (leave blank to keep current): ')
+                    end_time_str = input('Enter new end time (YYYY-MM-DD HH:MM:SS, leave blank to keep current): ')
+                    end_time = datetime.strptime(end_time_str, '%Y-%m-%d %H:%M:%S') if end_time_str else None
+                    priority_str = input('Enter new priority (CRITICAL/HIGH/MEDIUM/LOW, leave blank to keep current): ').upper()
+                    priority = Priority[priority_str] if priority_str else None
+                    status_str = input('Enter new status (BACKLOG/TODO/DOING/DONE/ARCHIVED, leave blank to keep current): ').upper()
+                    status = Status[status_str] if status_str else None
+                    task.update_task(current_user, title, description, end_time, priority, status, project.leader)
+                    print('Task updated.')
+                else:
+                    print('Task not found.')
+            else:
+                print('Project not found.')
+        elif task_choice == 'V':
+            project_id = input('Please enter the project ID: ')
+            project = projects.get(project_id)
+            if project:
+                task_id = input('Please enter the task ID: ')
+                task = next((task for task in project.tasks if task.task_id == task_id), None)
+                if task:
+                    task.view_task_details()
+                else:
+                    print('Task not found.')
+            else:
+                print('Project not found.')
+        else:
+            print('Invalid choice.')
+    else:
+        print('Invalid choice.')
+
+    input('Press any key to continue...')
+
     else :
         print('Wrong choice !')
     
