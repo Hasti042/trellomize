@@ -54,9 +54,15 @@ def delete_fired_user_orchangePassword(password) :
     cursor .execute('DELETE FROM users_table WHERE password = ?' , (password ,))
     database . commit()
     
-def update_info(password , username ) :
-    cursor .execute(f'UPDATE users_table SET password = ? WHERE username = ?' , (password , username))
-    database . commit()
+
+def update_info(username, password):
+    try:
+        cursor.execute('UPDATE users_table SET password = ? WHERE username = ?', (password, username))
+        database.commit()
+        print(f"Password updated for user: {username}")
+    except Exception as e:
+        print(f"Error updating password: {e}")
+        database.rollback()
 
 # ********************************************************************
 # superusers table
@@ -84,14 +90,9 @@ def deactive_users(password) :
     cursor .execute('DELETE FROM admins_table WHERE password = ?' ,(password ,))
 
 if __name__ == '__main__' :
-
    
     database .commit()
     #database .close()
-
-
-
-
 
 
 
