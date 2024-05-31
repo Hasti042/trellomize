@@ -8,7 +8,7 @@ async def start (update:Update , context:ContextTypes.DEFAULT_TYPE):
     global key_2
     key = [['📞ارتباط با ما']]
     key_2 = ReplyKeyboardMarkup(key , resize_keyboard=True)
-    if update.message.chat.id != 1243725429 :
+    if update.message.chat.id !=... :
         await context.bot.send_message(text=f'سلام {update.message.from_user.first_name}👋🏻❤️\n به ربات ما خوش اومدی' , chat_id=update.message.chat.id)
         await context.bot.send_message(text='برای ارتباط با ما کلیک کنید :' , chat_id=update.message.chat.id , reply_markup=key_2)
     else : 
@@ -29,8 +29,8 @@ async def send_message (update:Update , context:ContextTypes.DEFAULT_TYPE):
     button_2 = InlineKeyboardMarkup(button)
 
     if str(update.message.chat.id) not in B :
-        await context.bot.copy_message(chat_id=1243725429 , from_chat_id=update.message.chat.id , message_id=update.message.message_id)
-        await context.bot.send_message(chat_id=1243725429 , text=f'💬\nUserName : @{update.message.from_user.username}\nChatID : {update.message.chat.id}' , reply_markup=button_2)
+        await context.bot.copy_message(chat_id=... , from_chat_id=update.message.chat.id , message_id=update.message.message_id)
+        await context.bot.send_message(chat_id=... , text=f'💬\nUserName : @{update.message.from_user.username}\nChatID : {update.message.chat.id}' , reply_markup=button_2)
         await context.bot.send_message(text='پیام شما ارسال شد.✅' , chat_id=update.message.chat.id , reply_markup=key_2)
     else :
         await context.bot.send_message(text='❌شما بلاک شده اید.❌' , chat_id=update.message.chat.id)
