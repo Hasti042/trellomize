@@ -28,15 +28,18 @@ class Task:
         self.history = []
         self.comments = []
 
+    def uuid_getter(self):
+        return self.task_id
+
     def assign_member(self, username):
         if username not in self.assigned_to:
             self.assigned_to.append(username)
-            self.history.append(username, datetime.now())
+            self.history.append(f'{username} assigned in {datetime.now()}')
 
     def unassign_member(self, username):
         if username in self.assigned_to:
             self.assigned_to.remove(username)
-            self.history.append(username, datetime.now())
+            self.history.append(f'{username} assigned in {datetime.now()}')
 
     def add_comment(self, username, comment):
         self.comments.append((username, comment, datetime.now()))
@@ -79,11 +82,15 @@ class Project:
         self.title = title
         self.leader = leader
         self.members = []
+        self.tasks = []
 
     def add_member(self, username):
         if username != self.leader and username not in self.members:
             self.members.append(username)
 
+
+    def add_task(self, task):
+        self.tasks.append(task)
 
     def remove_member(self, username):
         if username in self.members:
@@ -169,5 +176,6 @@ class Users:
             task.update_task(self.username, title, description, end_time, priority, status)
         else:
             print(f"Task with ID {task_id} not found.")
+
 
 
