@@ -1,7 +1,7 @@
 # 0.1.0
 # ****************************************************** all of this for menu becouse wo havent got any web page or app and we working in cmd 
 import datetime
-import log_in as lo
+import loging as lo
 import maneger as m
 from trello import Project as pr
 from trello import Task as ts
@@ -83,7 +83,8 @@ while True:
                 priority = input('Please enter the task priority (CRITICAL/HIGH/MEDIUM/LOW): ').upper()
                 status = input('Please enter the task status (BACKLOG/TODO/DOING/DONE/ARCHIVED): ').upper()
                 task = ts(title, description, priority=Priority[priority], status=Status[status])
-                project.tasks.append(task)
+                print(f'{task.uuid_getter()} is your task ID.')
+                project.add_task(task)
                 print(f'Task {title} created.')
             else:
                 print('Only the project leader can create tasks or project not found.')
