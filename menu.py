@@ -3,9 +3,9 @@
 import datetime
 import log_in as lo
 import maneger as m
-from .trello import Project as pr
-from .trello import Task as ts
-from .trello import Priority, Status
+from trello import Project as pr
+from trello import Task as ts
+from trello import Priority, Status
 
 projects = {}
 current_user = None
@@ -34,7 +34,7 @@ while True:
     elif choice == 'T':
         print('If you want more support or to connect to our admin, please use this link: https://t.me/iust_BOT_bot')
     elif choice == 'S':
-        m.create_admin()
+        m.SystemAdmin.create_admin()
     elif choice == 'Q':
         break
     elif choice == 'P':
