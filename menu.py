@@ -16,7 +16,6 @@ while True:
     print('Press L to login.')
     print('Press C to change password or if you forgot your password.')
     print('Press S to set super user or create admin account.')
-    print('Press M to make a project.')
     print('Press Q to quit application.')
     print('Press T to see telegram support bot.')
     print('Press P to access the project section.')
